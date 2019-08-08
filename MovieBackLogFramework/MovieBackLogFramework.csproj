@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -183,18 +186,53 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\API\BackLogController.cs" />
+    <Compile Include="Controllers\BackLogController.cs" />
+    <Compile Include="Controllers\BacklogManager\Backlogmanager.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DTOS\MovieDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908042347119_Init.cs" />
+    <Compile Include="Migrations\201908042347119_Init.Designer.cs">
+      <DependentUpon>201908042347119_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908050055573_InitBackLog.cs" />
+    <Compile Include="Migrations\201908050055573_InitBackLog.Designer.cs">
+      <DependentUpon>201908050055573_InitBackLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908050126044_popmovies.cs" />
+    <Compile Include="Migrations\201908050126044_popmovies.Designer.cs">
+      <DependentUpon>201908050126044_popmovies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908050253332_UpdateSeededUser.cs" />
+    <Compile Include="Migrations\201908050253332_UpdateSeededUser.Designer.cs">
+      <DependentUpon>201908050253332_UpdateSeededUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908050309478_UpdateSeededUser2.cs" />
+    <Compile Include="Migrations\201908050309478_UpdateSeededUser2.Designer.cs">
+      <DependentUpon>201908050309478_UpdateSeededUser2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908070020055_AutoIncrementBacklogid.cs" />
+    <Compile Include="Migrations\201908070020055_AutoIncrementBacklogid.Designer.cs">
+      <DependentUpon>201908070020055_AutoIncrementBacklogid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\BackLog.cs" />
+    <Compile Include="Models\IBackLogContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MovieLogAppContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -254,6 +292,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\BackLog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -270,6 +309,26 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201908042347119_Init.resx">
+      <DependentUpon>201908042347119_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908050055573_InitBackLog.resx">
+      <DependentUpon>201908050055573_InitBackLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908050126044_popmovies.resx">
+      <DependentUpon>201908050126044_popmovies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908050253332_UpdateSeededUser.resx">
+      <DependentUpon>201908050253332_UpdateSeededUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908050309478_UpdateSeededUser2.resx">
+      <DependentUpon>201908050309478_UpdateSeededUser2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908070020055_AutoIncrementBacklogid.resx">
+      <DependentUpon>201908070020055_AutoIncrementBacklogid.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

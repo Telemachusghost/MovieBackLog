@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MovieBackLogFramework.Controllers.BacklogManager;
 using MovieBackLogFramework.Models;
 
 namespace MovieBackLogFramework.Controllers
@@ -151,7 +152,14 @@ namespace MovieBackLogFramework.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                // TODO: Give the new user a unique backlog id 
+                // I think a way to do that for now would be to create an API to create a new backlog and then give what the ID of the created backlog is.
+                IBackLogContext _context = new MovieLogAppContext();
+                var backlogmanager = new BacklogManage(_context);
+
+                var backlog = backlogmanager.CreateBackLog();
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, BackLog = backlog };
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
