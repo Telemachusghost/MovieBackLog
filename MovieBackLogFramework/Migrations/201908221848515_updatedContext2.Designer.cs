@@ -7,13 +7,13 @@ namespace MovieBackLogFramework.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AutoIncrementBacklogid : IMigrationMetadata
+    public sealed partial class updatedContext2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AutoIncrementBacklogid));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updatedContext2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201908070020055_AutoIncrementBacklogid"; }
+            get { return "201908221848515_updatedContext2"; }
         }
         
         string IMigrationMetadata.Source

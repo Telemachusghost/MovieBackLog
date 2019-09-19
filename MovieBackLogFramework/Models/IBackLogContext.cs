@@ -10,7 +10,7 @@ namespace MovieBackLogFramework.Models
     {
         DbSet<Movie> Movies { get; }
         DbSet<BackLog> BackLogs { get; }
-        DbSet<ApplicationUser> Users { get; }
+        //DbSet<ApplicationUser> Users { get; }
         int SaveChanges();
         void MarkAsModifed(BackLog log);
     }

@@ -1,0 +1,95 @@
+﻿.byMarc-ddcbl-table {
+    border-collapse: collapse;
+}
+
+.byMarc-ddcbl-commandsTableRow {
+}
+
+.byMarc-ddcbl-displayDiv {
+    width: 100px;
+    height: 14px;
+}
+
+.byMarc-ddcbl-scrollDiv {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 10px 0 3px;
+}
+
+.byMarc-ddcbl-itemRow {
+}
+
+.byMarc-ddcbl-checkbox-disabled {
+}
+
+.byMarc-ddcbl-checkbox {
+    display: block;
+    padding: 0;
+    margin: 2px; /* Controls the item spacing. */
+}
+
+.byMarc-ddcbl-item {
+}
+
+.byMarc-ddcbl-itemlabel {
+    padding: 0;
+    white-space: nowrap;
+    font-weight: normal;
+    font-family: Arial;
+    font-size: 12px;
+    text-align: left;
+}
+
+.byMarc-ddcbl-itemlabel-disabled {
+    color: lightgray;
+}
+
+.byMarc-ddcbl-commandsTableCell {
+    text-align: left;
+}
+
+.byMarc-ddcbl-command {
+    padding: 0 5px 0 5px;
+    text-decoration: none;
+    font-family: Arial;
+    font-size: 14px;
+}
+
+.byMarc-ddcbl-command-disabled {
+    color: lightgray;
+}
+
+.byMarc-ddcbl-dropdown {
+    position: absolute;
+    background-color: white;
+    border: 1px solid darkgray;
+}
+
+.byMarc-ddcbl-inputbox {
+    border: 1px solid darkgray;
+    font-weight: normal;
+    font-family: Arial;
+    font-size: 13px;
+}
+
+.byMarc-ddcbl-input {
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inherit;
+    padding: 0 5px 0 5px;
+    text-align: left;
+}
+
+.byMarc-ddcbl-button {
+    line-height: 0;
+    min-width: 16px;
+}
+
+.byMarc-ddcbl-button-collapsed:before {
+    content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAATCAIAAAAWBRqYAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAHNJREFUOE/tksENgCAMRdEx2YnRYABGgAsb4AttTIQm6tX4LqXtf6ey9d7dG3atj/mQUGtNKcl7hRUBeavQWgshmA5DVgS05w5CKcV7H2PUfkDLkJX2HE3rYHLWNFwEOB0zDbMA4phpMATIOZtp+D/fPc4dPVH3m8UgyxoAAAAASUVORK5CYII=);
+}
+
+.byMarc-ddcbl-button-expanded:before {
+    content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAATCAIAAAD5x3GmAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAIZJREFUOE/tkrENAyEMRckNQMEErMYaDMAaTEWLmICCCfIkn4ISk4IrT/cbbH8/yUj/VWs1mzrOd0f3ZXrvpZSzUcJiQerJjDFyzkuMIRYL0k7Gex9j1JgAWCzI5Os/zrkf7ANgyQQtcsDdKaUQArUG0Do7glFoAP3NW2vNWqsB9GT0CmPMG1P9UG5ABYpCAAAAAElFTkSuQmCC);
+}

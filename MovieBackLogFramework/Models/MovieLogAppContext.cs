@@ -8,13 +8,15 @@ namespace MovieBackLogFramework.Models
 {
     public class MovieLogAppContext : DbContext, IBackLogContext
     {
-        public MovieLogAppContext() : base("name=MovieLogAppContext")
+        public MovieLogAppContext() : base("DefaultConnection")
         {
         }
 
-        public DbSet<Movie> Movies { get; set; }
-        public DbSet<ApplicationUser> Users {get; set;}
-        public DbSet<BackLog> BackLogs { get; set; }
+
+
+        public virtual DbSet<Movie> Movies { get; set; }
+        //public DbSet<ApplicationUser> Users {get; set;}
+        public virtual DbSet<BackLog> BackLogs { get; set; }
 
         // For put function
         public void MarkAsModifed(BackLog log)

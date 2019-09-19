@@ -1,57 +1,74 @@
 ﻿@model IEnumerable<MovieBackLogFramework.Models.Movie>
 
 @{
-    ViewBag.Title = "Index";
+
+    ViewBag.Title = "Backlog";
 }
 
-<h2>Index</h2>
+@*TODO take users name and place into view to personalize backlog view*@
+<h2>Your Backlog</h2>
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
+@*TODO list movies here*@
+<table id="backlog" class="table table-bordered table-hover">
+    <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReleaseYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RunningTime)
-            </th>
-            <th></th>
+            <th>Title</th>
+            <th>Release Year</th>
+            <th>Running Time</th>
         </tr>
+    </thead>
+    <tbody></tbody>
+</table>
 
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReleaseYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RunningTime)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.MovieId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.MovieId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.MovieId })
-            </td>
-        </tr>
-    }
+<p>
+    @* TODO Have an add to backlog button that takes you to a seperate list of movies and then an option to add to backlog. *@
+</p>
 
-    </table>
-*@
+
 
 @section scripts {
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
     <script>
         $(document).ready(function () {
-            var movies = $.ajax({
-                url: "/api/backlog/" + "@ViewBag.userId",
-                method: "GET"
-            })
-        })
+            var table = $("#backlog").DataTable({
+                ajax: {
+                    url: "/api/backlog/" + "@ViewBag.userId",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "title",
+                        render: function (movie) {
+                            return movie.title;
+                        }
+                        //render: function(data, type, movie) {
+                        //    return "<a href='/movies/edit/" + movie.id + "'>" + movie.name + "</a>";
+                        //}
+                    },
+                    {
+                        data: "runningtime",
+                        render: function (movie) {
+                            return movie.runningtime;
+                        }
+                    },
+                    {
+                        data: "releasedate",
+                        render: function (movie) {
+                            return movie.releasedate;
+                        }
+                    },
+                    //{
+                    //    data: "id",
+                    //    render:
+                    //        //function (data) {
+                    //    //    return "<button class='btn-link js-delete' data-movie-id=" + data + ">Delete</button>";
+                    //    //}
+                    //}
+                ]
+            });
+        });
+
+
     </script>
 }
