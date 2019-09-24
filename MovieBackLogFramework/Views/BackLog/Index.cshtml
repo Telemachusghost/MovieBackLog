@@ -58,9 +58,9 @@
                         //}
                     },
                     {
-                        data: "id",
+                        data: "MovieId",
                         render: function (data) {
-                            return "<button class='btn-link js-delete' data-movie-id=" + data + ">Delete</button>";
+                            return "<button class='btn-link js-delete' data-movie-id=" + data + " " + "data-user-id=" + "@ViewBag.userId" + ">Delete</button>";
                         }
                     }
                 ]
@@ -72,7 +72,7 @@
                 bootbox.confirm("Are you sure you want to remove this movie from backlog?", function (result) {
                     if (result) {
                         $.ajax({
-                            url: "/api/backlog/" + button.attr("data-movie-id"),
+                            url: "/api/backlog/" + button.attr("data-movie-id") + "/" + button.attr("data-user-id"),
                             method: "DELETE",
                             success: function () {
                                 table.row(button.parents("tr")).remove().draw();

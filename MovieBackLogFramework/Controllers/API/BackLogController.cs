@@ -25,8 +25,6 @@ namespace MovieBackLogFramework.Controllers.API
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Movie, MovieDto>();
-                // Ignore movie.id
-                //cfg.CreateMap<MovieDto, Movie>().ForMember(src => src.MovieId, opt => opt.Ignore());
             });
             // Init mapper
             mapper = config.CreateMapper();
@@ -62,6 +60,22 @@ namespace MovieBackLogFramework.Controllers.API
             var movies = _context.Movies.ToList();
             var moviesDto = movies.Select(movie => mapper.Map<MovieDto>(movie)).ToList();
             return moviesDto;
+        }
+
+        [HttpDelete]
+        [Route("api/backlog/{id}/{userId}")]
+        public IHttpActionResult DeleteMovie(int id, string userId)
+        {
+
+            var movies = _context2.Users.Where(u => u.Id == userId)
+                                         .Select(u => u.BackLog)
+                                         .SingleOrDefault();
+            var movieInDb = movies.Movies.SingleOrDefault(c => c.MovieId == id);
+
+            movies.Movies.Remove(movieInDb);
+            _context2.SaveChanges();
+
+            return Ok();
         }
     }
 } 

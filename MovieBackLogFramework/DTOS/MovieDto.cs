@@ -18,5 +18,7 @@ namespace MovieBackLogFramework.DTOS
 
         [Required]
         public int RunningTime { get; set; }
+
+        public int MovieId { get; set; }
     }
 }
