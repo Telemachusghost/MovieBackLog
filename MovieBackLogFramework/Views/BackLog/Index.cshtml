@@ -15,6 +15,7 @@
             <th>Title</th>
             <th>Release Year</th>
             <th>Running Time</th>
+            <th>Remove Off Backlog</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -38,34 +39,47 @@
                 },
                 columns: [
                     {
-                        data: "title",
-                        render: function (movie) {
-                            return movie.title;
-                        }
+                        data: "Title",
+                        
                         //render: function(data, type, movie) {
                         //    return "<a href='/movies/edit/" + movie.id + "'>" + movie.name + "</a>";
                         //}
                     },
                     {
-                        data: "runningtime",
-                        render: function (movie) {
-                            return movie.runningtime;
-                        }
+                        data: "ReleaseYear",
+                        //render: function (movie) {
+                        //    return movie.runningtime;
+                        //}
                     },
                     {
-                        data: "releasedate",
-                        render: function (movie) {
-                            return movie.releasedate;
-                        }
+                        data: "RunningTime",
+                        //render: function (movie) {
+                        //    return movie.releasedate;
+                        //}
                     },
-                    //{
-                    //    data: "id",
-                    //    render:
-                    //        //function (data) {
-                    //    //    return "<button class='btn-link js-delete' data-movie-id=" + data + ">Delete</button>";
-                    //    //}
-                    //}
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-movie-id=" + data + ">Delete</button>";
+                        }
+                    }
                 ]
+            });
+
+            $("#backlog").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to remove this movie from backlog?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/backlog/" + button.attr("data-movie-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
             });
         });
 

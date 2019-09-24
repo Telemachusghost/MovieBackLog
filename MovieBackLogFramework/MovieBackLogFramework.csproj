@@ -410,6 +410,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\byMarc\dropDownCheckBoxList\collapsed.png" />
     <Content Include="Images\byMarc\dropDownCheckBoxList\expanded.png" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
