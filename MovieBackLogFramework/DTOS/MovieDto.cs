@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieBackLogFramework.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -19,6 +20,11 @@ namespace MovieBackLogFramework.DTOS
         [Required]
         public int RunningTime { get; set; }
 
+        [Required]
+        public ICollection<Genre> Genres { get; set; }
+
         public int MovieId { get; set; }
+
+        
     }
 }

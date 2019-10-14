@@ -1,45 +1,36 @@
 ﻿@model IEnumerable<MovieBackLogFramework.Models.Movie>
-
 @{
-
-    ViewBag.Title = "Backlog";
+    ViewBag.Title = "Movies";
 }
 
-@*TODO take users name and place into view to personalize backlog view*@
-<h2>Your Backlog</h2>
+<h2>Movies To Add</h2>
 
-
-<table id="backlog" class="table table-bordered table-hover">
+<table id="movies" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>Title</th>
             <th>Release Year</th>
             <th>Running Time</th>
             <th>Genres</th>
-            <th>Remove Off Backlog</th>
+            <th>Add To Backlog</th>
         </tr>
     </thead>
     <tbody></tbody>
 </table>
 
-<p>
-    @* TODO Have an add to backlog button that takes you to a seperate list of movies and then an option to add to backlog. *@
-</p>
-
-
 
 @section scripts {
     <script>
         $(document).ready(function () {
-            var table = $("#backlog").DataTable({
+            var table = $("#movies").DataTable({
                 ajax: {
-                    url: "/api/backlog/" + "@ViewBag.userId",
+                    url: "/api/backlog/movies",
                     dataSrc: ""
                 },
                 columns: [
                     {
                         data: "Title",
-                        
+
                         //render: function(data, type, movie) {
                         //    return "<a href='/movies/edit/" + movie.id + "'>" + movie.name + "</a>";
                         //}
@@ -69,29 +60,27 @@
                     {
                         data: "MovieId",
                         render: function (data) {
-                            return "<button class='btn-link js-delete' data-movie-id=" + data + " " + "data-user-id=" + "@ViewBag.userId" + ">Delete</button>";
+                            return "<button class='btn-link js-add' data-movie-id=" + data + " " + "data-user-id=" + "@ViewBag.userId" + ">Add</button>";
                         }
                     }
                 ]
             });
 
-            $("#backlog").on("click", ".js-delete", function () {
+            $("#movies").on("click", ".js-add", function () {
                 var button = $(this);
 
-                bootbox.confirm("Are you sure you want to remove this movie from backlog?", function (result) {
+                bootbox.confirm("Are you sure you want to add to your backlog!?", function (result) {
                     if (result) {
                         $.ajax({
-                            url: "/api/backlog/" + button.attr("data-movie-id") + "/" + button.attr("data-user-id"),
-                            method: "DELETE",
+                            url: "/api/backlog/add" + "/" + button.attr("data-movie-id") + "/" + button.attr("data-user-id"),
+                            method: "POST",
                             success: function () {
-                                table.row(button.parents("tr")).remove().draw();
+                                bootbox.alert("Oh no, movie added. You will never finish your backlog now!");
                             }
                         });
                     }
                 });
             });
         });
-
-
-    </script>
-}
+        </script>
+    }

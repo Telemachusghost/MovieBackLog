@@ -196,6 +196,7 @@
     <Compile Include="Controllers\BacklogManager\Backlogmanager.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="DTOS\MovieDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -228,11 +229,32 @@
     <Compile Include="Migrations\201908221848515_updatedContext2.Designer.cs">
       <DependentUpon>201908221848515_updatedContext2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910132214066_Add Genre To Movies.cs" />
+    <Compile Include="Migrations\201910132214066_Add Genre To Movies.Designer.cs">
+      <DependentUpon>201910132214066_Add Genre To Movies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910132220252_Seed Genre.cs" />
+    <Compile Include="Migrations\201910132220252_Seed Genre.Designer.cs">
+      <DependentUpon>201910132220252_Seed Genre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910140201327_stronger genre movie relationship.cs" />
+    <Compile Include="Migrations\201910140201327_stronger genre movie relationship.Designer.cs">
+      <DependentUpon>201910140201327_stronger genre movie relationship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910140329114_turned off lazy loading for genres.cs" />
+    <Compile Include="Migrations\201910140329114_turned off lazy loading for genres.Designer.cs">
+      <DependentUpon>201910140329114_turned off lazy loading for genres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910140437321_test.cs" />
+    <Compile Include="Migrations\201910140437321_test.Designer.cs">
+      <DependentUpon>201910140437321_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\BackLog.cs" />
     <Compile Include="Models\CurrentUser.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IBackLogContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -540,6 +562,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\BackLog\Index.cshtml" />
+    <Content Include="Views\Movies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -579,6 +602,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908221848515_updatedContext2.resx">
       <DependentUpon>201908221848515_updatedContext2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910132214066_Add Genre To Movies.resx">
+      <DependentUpon>201910132214066_Add Genre To Movies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910132220252_Seed Genre.resx">
+      <DependentUpon>201910132220252_Seed Genre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910140201327_stronger genre movie relationship.resx">
+      <DependentUpon>201910140201327_stronger genre movie relationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910140329114_turned off lazy loading for genres.resx">
+      <DependentUpon>201910140329114_turned off lazy loading for genres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910140437321_test.resx">
+      <DependentUpon>201910140437321_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

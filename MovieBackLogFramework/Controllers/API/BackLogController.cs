@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace MovieBackLogFramework.Controllers.API
 {
@@ -36,29 +37,27 @@ namespace MovieBackLogFramework.Controllers.API
         public IEnumerable<MovieDto> GetMovies(string userId)
         {
 
-            dynamic movies2;
-            var movies = _context2.Users.Where(u => u.Id == userId)
-                                         .Select(u => u.BackLog)
-                                         .SingleOrDefault();
-            if (movies == null)
+            dynamic backlog2;
+            var backlog = retreiveBacklog(userId);
+            if (backlog == null)
             {
-                movies2 = new List<MovieDto>();
+                backlog2 = new List<MovieDto>();
             }
             else
             {
-                movies2 = movies.Movies.Select(movie => mapper.Map<MovieDto>(movie));
+                backlog2 = backlog.Movies.Select(movie => mapper.Map<MovieDto>(movie));
             }
 
-            return movies2;
+            return backlog2;
         }
 
         // GET /api/backlog/movies
         [Route("api/backlog/movies")]
         public IEnumerable<MovieDto> GetAllMovies()
         {
-            
-            var movies = _context.Movies.ToList();
-            var moviesDto = movies.Select(movie => mapper.Map<MovieDto>(movie)).ToList();
+
+            var movies = _context.Movies.Include(m => m.Genres).ToList();
+            var moviesDto = movies.Select(movie => mapper.Map<MovieDto>(movie));
             return moviesDto;
         }
 
@@ -67,15 +66,59 @@ namespace MovieBackLogFramework.Controllers.API
         public IHttpActionResult DeleteMovie(int id, string userId)
         {
 
-            var movies = _context2.Users.Where(u => u.Id == userId)
-                                         .Select(u => u.BackLog)
-                                         .SingleOrDefault();
-            var movieInDb = movies.Movies.SingleOrDefault(c => c.MovieId == id);
-
-            movies.Movies.Remove(movieInDb);
+            var backlog = retreiveBacklog(userId);
+            var movieInDb = backlog.Movies.SingleOrDefault(c => c.MovieId == id);
+            
+            backlog.Movies.Remove(movieInDb);
             _context2.SaveChanges();
 
             return Ok();
+        }
+
+        // Essentially I add a movie to users backlog by creating a new movie and changing the navigation properties over
+        [HttpPost]
+        [Route("api/backlog/add/{id}/{userId}")]
+        public IHttpActionResult AddMovie(int id, string userId)
+        {
+            Movie movieInDb = _context.Movies.Include(m => m.Genres).SingleOrDefault(m => m.MovieId == id);
+            BackLog backlog = retreiveBacklog(userId);
+            List < Genre > genres = new List<Genre>();
+            
+            if (movieInDb == null)
+                return NotFound();
+
+            Movie movie = new Movie();
+            movie.ReleaseYear = movieInDb.ReleaseYear;
+            movie.Title = movieInDb.Title;
+            movie.RunningTime = movieInDb.RunningTime;
+            
+            backlog.Movies.Add(movie);
+            _context2.SaveChanges();
+            
+
+            // Add genre(s) to new movie by changing movieId from old movie to new movie
+            foreach (var genre in movieInDb.Genres.ToList())
+            {
+                Genre gen = new Genre() {Name = genre.Name};
+                genres.Add(gen);
+            }
+
+            movie.Genres = genres;
+            _context.Movies.Remove(movieInDb);
+            _context.SaveChanges();
+            _context2.SaveChanges();
+            
+
+            return Ok();
+
+        }
+
+        private BackLog retreiveBacklog(string userId)
+        {
+            return _context2.Users.Where(u => u.Id == userId)
+                                         .Select(u => u.BackLog)
+                                         .Include(u => u.Movies.Select(m => m.Genres))
+                                         .SingleOrDefault();
         }
     }
 } 
